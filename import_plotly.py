@@ -1,20 +1,19 @@
+import streamlit as st
 import plotly.graph_objects as go
 
-# Données des 6 forces + retour au point initial pour fermer la forme
 categories = [
-    "Intensité concurrentielle", 
-    "Pouvoir de négociation des clients", 
-    "Pouvoir de négociation des fournisseurs", 
-    "Produits de substitution", 
-    "Menace de nouveaux entrants", 
+    "Intensité concurrentielle",
+    "Pouvoir de négociation des clients",
+    "Pouvoir de négociation des fournisseurs",
+    "Produits de substitution",
+    "Menace de nouveaux entrants",
     "Pouvoir public"
 ]
 
 values = [5, 4, 3, 2, 2, 3]
-values += [values[0]]  # pour fermer le polygone
+values += [values[0]]
 categories += [categories[0]]
 
-# Création du radar chart
 fig = go.Figure()
 
 fig.add_trace(go.Scatterpolar(
@@ -29,18 +28,12 @@ fig.update_layout(
     polar=dict(
         radialaxis=dict(
             visible=True,
-            range=[0, 5],
-            tickfont=dict(size=12)
-        ),
-        angularaxis=dict(
-            tickfont=dict(size=13)
+            range=[0, 5]
         )
     ),
     showlegend=False,
-    title=dict(
-        text="Étoile sectorielle des cinq (+1) forces de Porter",
-        font=dict(size=18)
-    )
+    title="Étoile sectorielle des cinq (+1) forces de Porter"
 )
 
-fig.show()
+# 🔥 This line is critical!
+st.plotly_chart(fig)
